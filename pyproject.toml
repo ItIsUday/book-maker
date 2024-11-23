@@ -8,6 +8,7 @@ packages = [{include = "book_maker"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pypdf = "^5.1.0"
 
 
 [build-system]
