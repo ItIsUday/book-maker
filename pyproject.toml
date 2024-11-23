@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "book-maker"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "A tool to convert pdf to books, which can be printed as A5 size on A4 sheets"
+authors = ["Uday A S <iamuday1618@gmail.com>"]
 readme = "README.md"
 packages = [{include = "book_maker"}]
 
