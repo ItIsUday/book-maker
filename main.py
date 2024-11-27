@@ -60,8 +60,7 @@ def parse_arguments():
 def main():
     # TODO: Use function composition here.
     args = parse_arguments()
-    input_file, output_file = args.input_pdf, args.output_pdf
-    pages = read_pages(input_file)
+    pages = read_pages(args.input_pdf)
 
     slices = divide(2, pages)
     merged_pages = list(merge_pages(slices))
@@ -70,7 +69,7 @@ def main():
     for i, p in enumerate(merged_pages):
         p.rotate(90 + 180 * (i % 2)).transfer_rotation_to_content()
 
-    write_pages(output_file, merged_pages)
+    write_pages(args.output_pdf, merged_pages)
 
 
 if __name__ == '__main__':
