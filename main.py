@@ -45,21 +45,22 @@ def parse_arguments():
                                      description="Converts PDF into books for easy printing")
     parser.add_argument("input_pdf",
                         type=str,
-                        help="Input PDF filepath"
+                        help="Input PDF filepath",
                         )
     parser.add_argument("-o",
                         "--output_pdf",
                         type=str,
                         help="Output PDF filepath",
-                        default="output.pdf"
+                        default="output.pdf",
                         )
     args = parser.parse_args()
-    return args.input_pdf, args.output_pdf
+    return args
 
 
 def main():
     # TODO: Use function composition here.
-    input_file, output_file = parse_arguments()
+    args = parse_arguments()
+    input_file, output_file = args.input_pdf, args.output_pdf
     pages = read_pages(input_file)
 
     slices = divide(2, pages)
