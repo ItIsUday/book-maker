@@ -1,7 +1,8 @@
+import argparse
 from itertools import chain
 
-from pypdf import PdfReader, PdfWriter, PageObject
 from more_itertools import divide
+from pypdf import PdfReader, PdfWriter, PageObject
 
 
 def merge_pages(partitions):
@@ -39,10 +40,28 @@ def write_pages(filename, pages):
         pdf_writer.write(output_file)
 
 
-# TODO: Take input and output file paths as flags,
+def parse_arguments():
+    parser = argparse.ArgumentParser(prog="Book Maker",
+                                     description="Converts PDF into books for easy printing")
+    parser.add_argument("input_pdf",
+                        type=str,
+                        help="Input PDF filepath"
+                        )
+    parser.add_argument("-o",
+                        "--output_pdf",
+                        type=str,
+                        help="Output PDF filepath",
+                        default="output.pdf"
+                        )
+    args = parser.parse_args()
+    return args.input_pdf, args.output_pdf
+
+
 def main():
     # TODO: Use function composition here.
-    pages = read_pages("cake 2.pdf")
+    input_file, output_file = parse_arguments()
+    pages = read_pages(input_file)
+
     slices = divide(2, pages)
     merged_pages = list(merge_pages(slices))
 
@@ -50,7 +69,7 @@ def main():
     for i, p in enumerate(merged_pages):
         p.rotate(90 + 180 * (i % 2)).transfer_rotation_to_content()
 
-    write_pages("output.pdf", merged_pages)
+    write_pages(output_file, merged_pages)
 
 
 if __name__ == '__main__':
